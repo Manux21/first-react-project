@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import Car from './Car/Car.js'
-
 class App extends Component {
 
     state = {
@@ -73,7 +72,6 @@ class App extends Component {
                 }}>
                     { cars }
                 </div>
-
             </div>
         );
     }
