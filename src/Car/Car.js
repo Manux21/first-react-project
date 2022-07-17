@@ -1,35 +1,60 @@
 import React from 'react'
-import './Car.css'
+import './Car.scss'
 
 
-const Car = props => {
-    const inputClasses = ['input']
+class Car extends React.Component {
 
-    if (props.name !== '') {
-        inputClasses.push('green')
-    } else {
-        inputClasses.push('red')
+    componentWillReceiveProps(nextProps) {
+        console.log('Car componentWillReceiveProps', nextProps)
     }
 
-    if (props.name.length > 4) {
-        inputClasses.push('bold')
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log('Car shouldComponentUpdate', nextProps, nextState)
+        return nextProps.name.trim() !== this.props.name.trim()
     }
 
 
+    componentWillUpdate(nextProps, nextState) {
+        console.log('Car componentWillUpdate', nextProps, nextState)
+    }
 
-    return (
-        <div className='Car'>
-            <h3>Car name: {props.name}</h3>
-            <p>Year: <strong>{props.year}</strong></p>
-            <input
-                type="text"
-                onChange={props.onChangeName}
-                value={props.name}
-                className={inputClasses.join(' ')}
-            />
-            <button onClick={props.onDelete}>Delete</button>
-        </div>
-    )
+    componentDidUpdate() {
+        console.log('Car componentDidUpdate')
+    }
+
+
+    render() {
+        console.log('Car render')
+        const inputClasses = ['input']
+
+        if (this.props.name !== '') {
+            inputClasses.push('green')
+        } else {
+            inputClasses.push('red')
+        }
+
+        if (this.props.name.length > 4) {
+            inputClasses.push('bold')
+        }
+
+        return (
+            <div className='Car'>
+                <h3>Car name: {this.props.name}</h3>
+                <p>Year: <strong>{this.props.year}</strong></p>
+                <input
+                    type="text"
+                    onChange={this.props.onChangeName}
+                    value={this.props.name}
+                    className={inputClasses.join(' ')}
+                />
+                <button onClick={this.props.onDelete}>Delete</button>
+            </div>
+        )
+    }
 }
+
+// const Car = props => {
+//
+// }
 
 export default Car
